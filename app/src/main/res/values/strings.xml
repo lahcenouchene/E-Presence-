@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">E-presence</string>
+    <string name="BouttonAdd">BouttonAdd</string>
+    <string name="add_new_class">title</string>
+    <string name="Class_name">edit1</string>
+    <string name="subject_name">Subject_Name</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="class_Name">Class_Name</string>
+
+</resources>
