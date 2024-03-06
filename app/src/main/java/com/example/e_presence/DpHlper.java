@@ -26,7 +26,7 @@ public class DpHlper extends SQLiteOpenHelper {
     private static final String DROP_COURS_TABLE = "DROP TABLE IF EXISTS " + TABLE_COURS;
     private static final String SELECT_COURS_TABLE = "SELECT * FROM " + TABLE_COURS;
 
-    //table etudiant
+    //table etudiant lalcdshjsahvjcehkbeiffeij
 
     private static final String TABLE_Etudiant= "table_etudiant";
     private static final String S_ID = "s_id";
