@@ -4,5 +4,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/add_student"
-        android:title="Add Student"/>
+        android:title="Ajouter un etudiant"/>
+    <item
+        android:id="@+id/show_Calendar"
+        android:title="Changer la Date"/>
+    <item
+        android:id="@+id/show_attendance_sheet"
+        android:title=" Feuille de présence "/>
 </menu>

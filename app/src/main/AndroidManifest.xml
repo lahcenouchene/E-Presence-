@@ -13,6 +13,9 @@
         android:theme="@style/Base.Theme.Epresence"
         tools:targetApi="31">
         <activity
+            android:name=".SheetListMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".StudentActivity"
             android:exported="false" />
         <activity
@@ -27,11 +30,3 @@
     </application>
 
 </manifest>
-
-
-
-
-
-
-
-

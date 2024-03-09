@@ -1,6 +1,7 @@
 package com.example.e_presence;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassVieHolder> {
         this.context=context;
     }
 
-    public static class ClassVieHolder extends RecyclerView.ViewHolder{
+    public static class ClassVieHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
     TextView className;
     TextView subjectName;
         public ClassVieHolder(@NonNull View itemView,OnItemClickListner onItemClickListner) {
@@ -39,6 +40,13 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassVieHolder> {
             className=itemView.findViewById(R.id.class_id);
             subjectName=itemView.findViewById(R.id.Subject_id);
             itemView.setOnClickListener(v -> onItemClickListner.onClick(getAdapterPosition()));
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.add(getAdapterPosition(),0,0,"EDIT");
+            menu.add(getAdapterPosition(),1,0,"DELETE");
         }
     }
     @NonNull
