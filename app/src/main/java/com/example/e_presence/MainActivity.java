@@ -80,8 +80,21 @@ public class MainActivity extends AppCompatActivity {
         ImageButton save=(ImageButton) toolbar.findViewById(R.id.save);
         title.setText("Attendance App");
         subtitle.setVisibility(View.INVISIBLE);
-        back.setVisibility(View.INVISIBLE);
+
         save.setVisibility(View.INVISIBLE);
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créez une intention pour démarrer LoginActivity
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                // Terminez l'activité actuelle
+                finish();
+            }
+        });
+
     }
 
     private void goToItemActivity(int position) {
