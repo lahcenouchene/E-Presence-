@@ -1,5 +1,3 @@
-
-
 package com.example.e_presence;
 
 import androidx.annotation.NonNull;
@@ -8,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,6 @@ public class StudentActivity extends AppCompatActivity {
     private Myclendar calendar;
     private  TextView subtitle;
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
@@ -53,23 +52,39 @@ public class StudentActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new StudentAdapter(this,studentItems);
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListner(position1 -> changeStatus(position));
+        loadStatusData();
+        adapter.setOnItemClickListner(position1 -> changeStatus(position1));
         loadStatusData();
     }
 
-    private void loadData() {
-        Cursor cursor=dpHlper.getStudents(cid);
-        Log.i("1234567890","loadData:"+cid);
-        studentItems.clear();
-        while (cursor.moveToNext()){
-            int colmenindex=cursor.getColumnIndex(DpHlper.S_ID);
-            long sid=cursor.getLong(colmenindex);
-            int colmenindex1=cursor.getColumnIndex(DpHlper.POSITION_ETUDIANT);
-            int roll=cursor.getInt(colmenindex1);
-            int colmenindex2=cursor.getColumnIndex(DpHlper.NOM_ETUDIANT);
-            String name=cursor.getString(colmenindex2);
-            studentItems.add(new StudentItem(sid,roll,name));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Reload status data when the activity resumes
+        loadStatusData();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveStatus();
+    }
+
+
+    private void loadData() {
+        Cursor cursor = dpHlper.getStudents(cid);
+        Log.i("1234567890", "loadData:" + cid);
+        studentItems.clear();
+        while (cursor.moveToNext()) {
+            int colIndex = cursor.getColumnIndex(DpHlper.S_ID);
+            long sid = cursor.getLong(colIndex);
+            int rollIndex = cursor.getColumnIndex(DpHlper.POSITION_ETUDIANT);
+            int roll = cursor.getInt(rollIndex);
+            int nameIndex = cursor.getColumnIndex(DpHlper.NOM_ETUDIANT);
+            String name = cursor.getString(nameIndex);
+            // Fetch status for each student
+            String status = dpHlper.getStatus(sid, calendar.getDate());
+            studentItems.add(new StudentItem(sid, roll, name, status)); // Pass the status to the constructor
         }
         cursor.close();
     }
@@ -92,6 +107,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveStatus();
+                Toast.makeText(StudentActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
             }
         });
         title.setText(className);
@@ -117,6 +133,7 @@ public class StudentActivity extends AppCompatActivity {
 
         }
     }
+    @SuppressLint("NotifyDataSetChanged")
     private void loadStatusData(){
         for (StudentItem studentItem : studentItems){
             String status=dpHlper.getStatus(studentItem.getSid(),calendar.getDate());
@@ -134,7 +151,7 @@ public class StudentActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.add_student){
             showStudentDialogue();
         }
-       else if (menuItem.getItemId() == R.id.show_Calendar){
+        else if (menuItem.getItemId() == R.id.show_Calendar){
             showCalendar();
         }
         else if (menuItem.getItemId() == R.id.show_attendance_sheet){
@@ -168,12 +185,15 @@ public class StudentActivity extends AppCompatActivity {
     }
 
     private void addStudent(String roll_string, String name) {
-        int roll=Integer.parseInt(roll_string);
-       long sid= dpHlper.addStudent(cid,roll,name);
-       StudentItem studentItem=new StudentItem(sid,roll,name);
+        int roll = Integer.parseInt(roll_string);
+        long sid = dpHlper.addStudent(cid, roll, name);
+        // Fetch status for the newly added student
+        String status = dpHlper.getStatus(sid, calendar.getDate());
+        StudentItem studentItem = new StudentItem(sid, roll, name, status);
         studentItems.add(studentItem);
         adapter.notifyDataSetChanged();
     }
+
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {

@@ -1,5 +1,4 @@
 package com.example.e_presence;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -110,7 +109,7 @@ public class DpHlper extends SQLiteOpenHelper {
 
     int deleteClass(long cid){
         SQLiteDatabase database=this.getReadableDatabase();
-       return database.delete(TABLE_COURS,C_ID+"=?",new String[]{String.valueOf(cid)});
+        return database.delete(TABLE_COURS,C_ID+"=?",new String[]{String.valueOf(cid)});
     }
     long updateClass(long cid,String className, String subjectName){
         SQLiteDatabase database=this.getWritableDatabase();
@@ -143,7 +142,7 @@ public class DpHlper extends SQLiteOpenHelper {
         return database.update(TABLE_Etudiant,values,S_ID+"=?",new String[]{String.valueOf(sid)});
 
     }
-    long addStatus(long sid,long cid, String date, String status) {
+    public long addStatus(long sid, long cid, String date, String status) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(S_ID, sid);
@@ -155,32 +154,34 @@ public class DpHlper extends SQLiteOpenHelper {
         return result;
     }
 
-    long updateStatus(long sid,String date, String status){
-        SQLiteDatabase database=this.getWritableDatabase();
-        ContentValues values=new ContentValues();
-        values.put(STATUS_key,status);
-        String whereClause=DATE + "='"+ date + " ' AND " +S_ID + "=" + sid;
-        return database.update(TABLE_STATUS,values,whereClause,null);
-
+    public long updateStatus(long sid, String date, String status) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(STATUS_key, status);
+        String whereClause = DATE + "='" + date + "' AND " + S_ID + "=" + sid;
+        long result = database.update(TABLE_STATUS, values, whereClause, null);
+        Log.d("Database", "updateStatus result: " + result);
+        return result;
     }
 
-        String getStatus(long sid, String date){
-        String status=null;
-        SQLiteDatabase database=this.getReadableDatabase();
-        String whereClause=DATE + "='"+ date + " ' AND " +S_ID + "=" + sid;
-            try (Cursor cursor = database.query(TABLE_STATUS, null, whereClause, null, null, null, null)) {
-                if (cursor.moveToFirst()) {
-                    int columnINdex = cursor.getColumnIndex(STATUS_key);
-                    status = cursor.getString(columnINdex);
-
-                }
+    public String getStatus(long sid, String date) {
+        String status = null;
+        SQLiteDatabase database = this.getReadableDatabase();
+        String whereClause = DATE + "='" + date + "' AND " + S_ID + "=" + sid;
+        try (Cursor cursor = database.query(TABLE_STATUS, null, whereClause, null, null, null, null)) {
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex(STATUS_key);
+                status = cursor.getString(columnIndex);
+                Log.d("Database", "getStatus: " + status);
             }
-            return status;
         }
+        return status;
+    }
 
-        Cursor getDistinctMonths(long cid){
-            SQLiteDatabase database=this.getReadableDatabase();
-            return database.query(TABLE_STATUS,new String[]{DATE},C_ID+"="+cid,null,"substr("+DATE+",4,7)",null,null);
-        }
+
+    Cursor getDistinctMonths(long cid){
+        SQLiteDatabase database=this.getReadableDatabase();
+        return database.query(TABLE_STATUS,new String[]{DATE},C_ID+"="+cid,null,"substr("+DATE+",4,7)",null,null);
+    }
 
 }

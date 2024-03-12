@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">E-presence</string>
+    <string name="BouttonAdd">Add button</string>
+    <string name="add_new_class">Title</string>
+    <string name="Class_name">edit1</string>
+    <string name="subject_name">Subject_Name</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="class_Name">ClassName</string>
+    <string name="show">Show Accounts</string>
+    <string name="RESGISTER">RESGISTER</string>
+    <string name="Email">Email</string>
+    <string name="Subtitle">Subtitle</string>
+    <string name="Create_account">Create Account</string>
+    <string name="PHONE">Phone</string>
+    <string name="login_link">Dont have an account? Register here.</string>
+    <string name="Title">Title</string>
+    <string name="Enregistrer">Save</string>
+    <string name="retourner">return</string>
+    <string name="position">position</string>
+    <string name="NOM_ETUDIANT">Student Name</string>
+    <string name="identifiant">identifier</string>
+    <string name="mars_2024">March 2024</string>
+    <string name="connexion">Login</string>
+    <string name="nom_utilisateur">UserName</string>
+    <string name="mot_de_passe">Password</string>
+    <string name="pas_de_compte">No account? Register here. </string>
+    <string name="show_langue">Show langue</string>
+</resources>

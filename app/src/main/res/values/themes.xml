@@ -3,6 +3,8 @@
     <style name="Base.Theme.Epresence" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <!-- Ajoutez cet attribut pour activer le mode plein écran -->
+        <item name="android:windowFullscreen">true</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 

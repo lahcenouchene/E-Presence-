@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentVieHolder> {
-     ArrayList<StudentItem> studentItems;
-     Context context;
-     private OnItemClickListner onItemClickListner;
+    ArrayList<StudentItem> studentItems;
+    Context context;
+    private OnItemClickListner onItemClickListner;
 
     public void setOnItemClickListner(OnItemClickListner onItemClickListner) {
         this.onItemClickListner=onItemClickListner;
@@ -26,19 +26,18 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentVieHolde
 
 
     public interface OnItemClickListner{
-          void onClick(int position);
-     }
+        void onClick(int position);
+    }
 
     public StudentAdapter(Context context, ArrayList<StudentItem> studentItems) {
         this.studentItems = studentItems;
         this.context=context;
     }
-
     public static class StudentVieHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
-    TextView roll;
-    TextView name;
-    TextView status;
-    CardView cardView;
+        TextView roll;
+        TextView name;
+        TextView status;
+        CardView cardView;
         public StudentVieHolder(@NonNull View itemView, OnItemClickListner onItemClickListner) {
 
             super(itemView);
@@ -56,6 +55,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentVieHolde
             menu.add(getAdapterPosition(),0,0,"EDIT");
             menu.add(getAdapterPosition(),1,0,"DELETE");
         }
+
     }
     @NonNull
     @Override
@@ -73,12 +73,18 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentVieHolde
     }
     private int getColor(int position){
         String status=studentItems.get(position).getStatus();
-        if (status.equals("P"))
+        if (status.equals("P")){
             return Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(context,R.color.prsent)));
-        else if (status.equals("A"))
-        return Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(context,R.color.absent)));
-        return Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(context,R.color.normal)));
+        }
+        else if (status.equals("A")){
+            return Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(context,R.color.absent)));
+
+        }
+        else {
+            return Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(context,R.color.normal)));
+        }
     }
+
 
     @Override
     public int getItemCount() {

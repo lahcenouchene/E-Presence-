@@ -31,7 +31,7 @@
                 android:id="@+id/roll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="01"
+                android:text="@string/identifiant"
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:textStyle="bold"/>
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="56dp"
-                android:text=" lahcen ouchene"
+                android:text="@string/NOM_ETUDIANT"
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:textStyle="bold"/>
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="36dp"
-                android:text="p"
+                android:text="@string/position"
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:textStyle="bold"/>

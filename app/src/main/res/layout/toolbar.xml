@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:paddingBottom="10dp"
-                    android:text="Title"
+                    android:text="@string/Title"
                     android:textSize="20dp"
                     android:textColor="#ffffff"
                     android:textStyle="bold" />
@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="Subtitle"
+                    android:text="@string/Subtitle"
                     android:textSize="16dp"
                     android:textColor="#ffffff"
                     android:textStyle="bold" />
@@ -56,7 +56,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/baseline_cloud_download_24"
                 android:layout_alignParentRight="true"
-                android:contentDescription="Enregistrer"/>
+                android:contentDescription="@string/Enregistrer"/>
 
             <ImageButton
                 android:id="@+id/back"
@@ -65,7 +65,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/icon_back1_foreground"
-                android:contentDescription="retourner"/>
+                android:contentDescription="@string/retourner"/>
 
 
         </RelativeLayout>
