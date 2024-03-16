@@ -1,15 +1,10 @@
 package com.example.e_presence;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +12,21 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -107,6 +116,11 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveStatus();
+                try {
+                    telechargerPdf();
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 Toast.makeText(StudentActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
             }
         });
@@ -122,6 +136,50 @@ public class StudentActivity extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.menu);
         toolbar.setOnMenuItemClickListener(menuItem->onMenuItemClick(menuItem));
     }
+
+    private void telechargerPdf() throws FileNotFoundException {
+        String cours = getIntent().getStringExtra("subjectName");
+        String date = calendar.getDate();
+
+        // Charger les informations des étudiants depuis la base de données
+        List<StudentItem> studentList = loadStudentDataFromDatabase();
+
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Attendance.pdf");
+        PdfWriter writer = new PdfWriter(file);
+        PdfDocument pdfDoc = new PdfDocument(writer);
+        Document document = new Document(pdfDoc);
+        document.add(new Paragraph("Course: " + cours));
+        document.add(new Paragraph("Date: " + date));
+
+        // Ajouter les informations des étudiants au document PDF
+        for (StudentItem student : studentList) {
+            document.add(new Paragraph("ID: " + student.getSid() + ", Name: " + student.getName() + ", Statuts: " + student.getStatus()));
+        }
+
+        document.close();
+    }
+
+    private List<StudentItem> loadStudentDataFromDatabase() {
+        List<StudentItem> studentList = new ArrayList<>();
+
+        // Charger les informations des étudiants à partir de la base de données
+        Cursor cursor = dpHlper.getStudents(cid);
+        while (cursor.moveToNext()) {
+            int colIndex = cursor.getColumnIndex(DpHlper.S_ID);
+            long sid = cursor.getLong(colIndex);
+            int rollIndex = cursor.getColumnIndex(DpHlper.POSITION_ETUDIANT);
+            int roll = cursor.getInt(rollIndex);
+            int nameIndex = cursor.getColumnIndex(DpHlper.NOM_ETUDIANT);
+            String name = cursor.getString(nameIndex);
+            // Fetch status for each student
+            String status = dpHlper.getStatus(sid, calendar.getDate());
+            studentList.add(new StudentItem(sid, roll, name, status)); // Pass the status to the constructor
+        }
+        cursor.close();
+
+        return studentList;
+    }
+
 
     private void saveStatus() {
         for (StudentItem studentItem : studentItems){

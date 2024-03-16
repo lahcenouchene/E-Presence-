@@ -17,7 +17,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/connexion"
+        android:text="@string/bien_venu"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/holo_blue_dark"
@@ -37,7 +37,9 @@
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"/>
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -48,7 +50,9 @@
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextUsername"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"/>
 
     <Button
         android:id="@+id/loginButton"
@@ -59,7 +63,10 @@
         android:onClick="loginUser"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
+        android:backgroundTint="@color/bleu"/>
 
     <TextView
         android:id="@+id/registerLinkTextView"
@@ -73,7 +80,8 @@
         app:layout_constraintTop_toBottomOf="@+id/showLangueButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        />
     <Button
         android:id="@+id/showLangueButton"
         android:layout_width="0dp"
@@ -84,5 +92,8 @@
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
+        android:backgroundTint="@color/bleu"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

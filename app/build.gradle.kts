@@ -38,4 +38,5 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.google.android.material:material:1.0.0")
      implementation ("com.google.code.gson:gson:2.8.8")
+    implementation ("com.itextpdf:itext7-core:8.0.3")
 }

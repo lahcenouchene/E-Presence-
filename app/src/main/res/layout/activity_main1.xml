@@ -27,7 +27,8 @@
         android:textColorHighlight="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMain" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
+        />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
@@ -85,7 +86,8 @@
         android:text="@string/RESGISTER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        android:backgroundTint="@color/bleu"/>
 
     <Button
         android:id="@+id/boutonshow"
@@ -98,14 +100,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        android:onClick="showAccountList"/>
+        android:onClick="showAccountList"
+        android:backgroundTint="@color/bleu"/>
     <TextView
         android:id="@+id/textViewLoginLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/login_link"
-        android:textColor="?attr/colorPrimary"
+        android:textColor="@android:color/holo_blue_dark"
         android:onClick="goToLoginActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

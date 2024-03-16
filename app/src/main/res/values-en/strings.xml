@@ -23,6 +23,7 @@
     <string name="NOM_ETUDIANT">Student Name</string>
     <string name="identifiant">identifier</string>
     <string name="mars_2024">March 2024</string>
+    <string name="bien_venu">Hello!</string>
     <string name="connexion">Login</string>
     <string name="nom_utilisateur">UserName</string>
     <string name="mot_de_passe">Password</string>
